@@ -12,9 +12,9 @@ Output:
 2
 '''
 
-n = 700
-m = 750
+n = int(input('Скорость машины: '))
+m = int(input('Расстояние: '))
 
 ans = (m - 1) // n + 1
 
-print(ans)
+print(f'Потребуется дней: {ans}')
