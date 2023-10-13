@@ -87,25 +87,29 @@
 На входе целое или вещественное число
 Посчитать количество цифр этого числа без использования строковых функций
 '''
+from decimal import Decimal
 
-num1 = input("введите число: ")
+num_txt = input("введите число: ")
 
-num_int = int(float(num1))
-num_float = float(num1)
+num_dec = Decimal(num_txt)
+num_int = int(num_dec)
 
-near_zero = num_float - num_int
+near_zero = num_dec - num_int
 counter = 0
 
-num1 = num_int
+while num_int:
 
-while num1:
-
-    num1 //= 10
+    num_int //= 10
     counter += 1
 
 if near_zero:
-    while near_zero < 1:
+
+    counter += 1 if near_zero == num_dec else 0
+
+    while near_zero:
+
         near_zero *= 10
+        near_zero -= int(near_zero)
         counter += 1
 
 print(f'qty: {counter}')
