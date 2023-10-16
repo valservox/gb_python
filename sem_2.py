@@ -19,25 +19,69 @@
 Фибоначи
 '''
 
-a = int(input('Input N: '))
-array = [0, 1]
+A = int(input("Введите натуральное число A: "))
 
-while a > array[-1]:
-    
-    array.append(array[-1] +  array[-2])
+first, second = 0, 1  # Первые два числа Фибоначчи
+current = 1 
+n = 1
 
-if a == array[-1]:
-    
-    print(len(array))
+while current < A:
 
-elif a - array[-2] < array[-1] - a:
+    current = first + second
+    # first, second = second, first + second
+    second = first
+    first = current
+    n += 1
 
-    print(array[-2])
+ans = n if current == A else -1
+'''
+if ans == -1 and current - first < second - current:
 
-elif a - array[-2] == array[-1] - a:
+    ans = first
 
-    print((array[-2]),array[-1])
+elif ans == -1 and current - first > second - current:
 
-else:
+    ans = second
 
-    print(array[-1])
+elif ans == -1 and current - first == second - current:
+
+    ans = (first,second)
+'''
+print(ans)
+
+
+'''
+# Задача №15. Решение в группах
+# 15. Иван Васильевич пришел на рынок и решил
+# купить два арбуза: один для себя, а другой для тещи.
+# Понятно, что для себя нужно выбрать арбуз
+# потяжелей, а для тещи полегче. Но вот незадача:
+# арбузов слишком много и он не знает как же выбрать
+# самый легкий и самый тяжелый арбуз? Помогите ему!
+# Пользователь вводит одно число N – количество
+# арбузов. Вторая строка содержит N чисел,
+# записанных на новой строчке каждое. Здесь каждое
+# число – это масса соответствующего арбуза
+# Input: 5 -> 5 1 6 5 9
+# Output: 1 9
+'''
+
+n_melons = int(input('Кол-во арбузов: '))
+
+n = 1
+
+while n <= n_melons:
+
+    curr_w = int(input(f'Вес арбуза {n}: '))
+
+    if n <= 1:
+
+        min_w = curr_w
+        max_w = curr_w
+
+    min_w = curr_w if curr_w < min_w else min_w
+    max_w = curr_w if curr_w > max_w else max_w
+
+    n += 1
+
+print((min_w,max_w)) 
