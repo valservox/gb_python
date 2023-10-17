@@ -85,7 +85,7 @@
 '''
 Дополнительное задание
 На входе целое или вещественное число
-Посчитать количество цифр этого числа без использования строковых функций
+Посчитать сумму цифр этого числа без использования строковых функций
 '''
 from decimal import Decimal
 
@@ -94,22 +94,19 @@ num_txt = input("введите число: ")
 num_dec = Decimal(num_txt)
 num_int = int(num_dec)
 
-near_zero = num_dec - num_int
-counter = 0
+remains = num_dec - num_int
+sum = 0
 
 while num_int:
 
+    sum += num_int % 10
     num_int //= 10
-    counter += 1
 
-if near_zero:
+while remains:
 
-    counter += 1 if near_zero == num_dec else 0
+    remains *= 10
+    sum += int(remains % 10)
+    remains -= int(remains)
+    print((remains,sum))
 
-    while near_zero:
-
-        near_zero *= 10
-        near_zero -= int(near_zero)
-        counter += 1
-
-print(f'qty: {counter}')
+print(f'Сумма цифр числа {num_txt}: {sum}')
