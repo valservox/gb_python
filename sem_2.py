@@ -142,7 +142,7 @@ Output: 2
     print()
     print(f'Самая длинная оттепель длилась {max_warm_days} дня/дней')
 
-factorial()
-fibonacci()
-weather()
-melons()
+# factorial()
+# fibonacci()
+# weather()
+# melons()
