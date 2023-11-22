@@ -28,63 +28,95 @@ phonebook = dict()
 
 def edit_contact():
 
-    def edit_phone(name,n_phone = 0):
+    name = (input('Введите имя для редактирования контакта: '))
+
+    def edit_phone():
+
+        n_phone = int(input(f'У контакта {name} Несколько телефонов. Введите порядковый номер для редактирования')) if len(phonebook[name]['phones']) > 1 else 1
 
         new_phone = int(input(f'Введите номер телефона {n_phone} для контакта {name}: '))
 
-        phonebook[name]['phones'][n_phone] = new_phone
+        phonebook[name]['phones'][n_phone - 1] = new_phone
 
         return
+    
+    def edit_email():
+    
+        new_email = input(f'Введите новый Email для контакта {name}:')
+
+        phonebook[name]['email'] = new_email
+    
+        return
+    
+    def edit_birthdate():
+    
+        new_birthdate = input(f'Введите дату рождения для контакта {name}:')
+
+        phonebook[name]['birthday'] = new_birthdate
+    
+        return
+    
+    edit_dict = {
+                 'phone': edit_phone,
+                 'email':edit_email,
+                 'birthdate':edit_birthdate
+                 }
 
     field = input('''
-                  Выберите контакт:
+                  Выберите поле для редактирования:
                   
-                  Телефон
-                  Email
-                  Дата рождения
-
-
-                  '''
+phone - Телефон (по умолчанию 1й в списке) 
+email - Электронная почта
+birthdate - Дата рождения
+'''
                   )
+    
+    try:
+        edit_dict[field]()
 
-
+    except:
+        print('Команда не найдена')
 
 # Словарь операций
-'''
-operations_dict = {
-                   'add': add_contact(), 
-                   'del': del_contact(), 
-                   'find': find_contact(),
-                   'all': show_all(), 
-                   'edit': edit_contact(),
-                   'close': close_app(),
-                   'import': import_contacts(),
-                   'export': export_contacts()
+
+def main_cycle():
+
+    app_active = True
+
+    operations_dict = {
+                #    'add': add_contact(), 
+                #    'del': del_contact(), 
+                #    'find': find_contact(),
+                #    'all': show_all(), 
+                   'edit': edit_contact,
+                #    'close': close_app,
+                #    'import': import_contacts(),
+                #    'export': export_contacts()
                    }
 
-'''
-def main_cycle():
-    while True:
+    while app_active:
 
         print("""Доступные команды:
                
-              add - добавить контакт 
-              del - удалить контакт
-              find - поиск контакта 
-              save - сохранение 
-              all - показать все контакты
-              close - закрыть приложение 
-              edit - изменеть контакт
-              """)
+add - добавить контакт 
+del - удалить контакт
+find - поиск контакта 
+save - сохранение 
+all - показать все контакты
+close - закрыть приложение 
+edit - изменить контакт
+""")
         
         command = input('Введите комманду: ')
-'''
+
+        app_active = False if command == 'close' else True
+
         try: 
-            operations_dict[command]
+            operations_dict[command]()
         
         except:
             print('Команда не найдена')
-'''
+
         
 
 # структура контакта
@@ -94,3 +126,4 @@ def main_cycle():
             }
 '''
 
+main_cycle()
