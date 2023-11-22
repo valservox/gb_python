@@ -22,9 +22,26 @@
 не должна быть линейной
 '''
 
+import os
+
 phonebook = dict()
 
+phonebook['Boyle'] = {'phones': [1212121,5555555],'email': '777@mail.com', 'birthday': '10.10.1990'}
+
 # Операции
+
+def import_contacts():
+
+    os.chdir(r"C:\Users\valeo\Documents\gb_python\sem_8\contatacts_app\import")
+    cur_dir = os.curdir
+    file_list = [file_path for file_path in os.listdir(cur_dir) if os.path.isfile(os.path.join(cur_dir, file_path))]
+
+    print('Доступные файлы для импорта: \n')
+    
+    for i in enumerate(file_list):
+        print(*i)
+
+    return
 
 def edit_contact():
 
@@ -63,7 +80,7 @@ def edit_contact():
                  }
 
     field = input('''
-                  Выберите поле для редактирования:
+Выберите поле для редактирования:
                   
 phone - Телефон (по умолчанию 1й в списке) 
 email - Электронная почта
@@ -84,14 +101,13 @@ def main_cycle():
     app_active = True
 
     operations_dict = {
-                #    'add': add_contact(), 
-                #    'del': del_contact(), 
-                #    'find': find_contact(),
-                #    'all': show_all(), 
+                #    'add': add_contact, 
+                #    'del': del_contact, 
+                #    'find': find_contact,
+                #    'all': show_all, 
                    'edit': edit_contact,
-                #    'close': close_app,
-                #    'import': import_contacts(),
-                #    'export': export_contacts()
+                   'import': import_contacts,
+                #    'export': export_contacts
                    }
 
     while app_active:
@@ -100,8 +116,7 @@ def main_cycle():
                
 add - добавить контакт 
 del - удалить контакт
-find - поиск контакта 
-save - сохранение 
+find - поиск контакта
 all - показать все контакты
 close - закрыть приложение 
 edit - изменить контакт
@@ -109,8 +124,12 @@ edit - изменить контакт
         
         command = input('Введите комманду: ')
 
-        app_active = False if command == 'close' else True
-
+        if command == 'close':
+            
+            print('Закрытие приложения')
+            
+            break    
+        
         try: 
             operations_dict[command]()
         
@@ -127,3 +146,4 @@ edit - изменить контакт
 '''
 
 main_cycle()
+
